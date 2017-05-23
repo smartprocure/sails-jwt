@@ -1,0 +1,42 @@
+{
+  "name": "sails-jwt",
+  "version": "0.0.0",
+  "description": "SmartProcure's JWT NPM package.",
+  "author": "SmartProcure",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config client.webpack.config.js",
+    "test": "standard src/**/*.js",
+    "lint": "standard src/**/*.js",
+    "prepublish": "npm run build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-async-to-promises": "^1.0.5",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.0",
+    "include-all": "^4.0.3",
+    "jsonwebtoken": "^7.3.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "standard": "^10.0.2",
+    "webpack": "^2.4.1"
+  },
+  "main": "client.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smartprocure/sails-jwt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smartprocure/sails-jwt/issues"
+  },
+  "homepage": "https://github.com/smartprocure/sails-jwt#readme"
+}
