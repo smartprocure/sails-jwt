@@ -58,4 +58,4 @@ typings/
 .env
 
 # Build Output
-*.tgz		client.js*
+client.js*
