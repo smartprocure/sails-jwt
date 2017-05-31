@@ -1,6 +1,6 @@
 import _ from 'lodash/fp'
 
-let storage = localStorage // eslint-disable-line
+let storage = window.localStorage // eslint-disable-line
 
 // Authentication
 let options = {
