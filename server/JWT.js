@@ -35,5 +35,13 @@ module.exports = {
     }
     throw new Error('No Authorization header was found')
   },
+  async setTokenPayload(req) {
+    let token = JWT.getToken(req)
+    // Add JWT payload to req
+    let payload = await JWT.verify(token)
+    req.tokenPayload = payload
+    req.impersonateStack = payload.impersonateStack || []
+    req.userStack = [payload.user].concat(req.impersonateStack)
+  },
   decode: jwt.decode
 }
