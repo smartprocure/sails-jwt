@@ -1,4 +1,5 @@
 {
+  "presets": [ "latest" ],
   "plugins": [
     "transform-export-extensions",
     "async-to-promises"
