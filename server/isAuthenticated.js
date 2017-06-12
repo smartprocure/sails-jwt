@@ -23,13 +23,8 @@ let dropMS = timestamp => moment((Math.floor(timestamp / 1000) - 1) * 1000).valu
 
 module.exports = (getModel, getMostRecentLogin, skipConcurrentLogins = _.stubFalse) => async function (req, res, next) {
   try {
-    let token = JWT.getToken(req)
-
     // Add JWT payload to req
-    let payload = await JWT.verify(token)
-    req.tokenPayload = payload
-    req.impersonateStack = payload.impersonateStack || []
-    req.userStack = [payload.user].concat(req.impersonateStack)
+    JWT.setTokenPayload(req)
 
     // Add req.user, etc
     _.convert({ immutable: false }).extend(req, getModel(payload))
