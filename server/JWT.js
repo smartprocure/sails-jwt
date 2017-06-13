@@ -6,7 +6,7 @@ let jwt = require('jsonwebtoken')
 // require('sp-jwt').JWT.secret = sails.jwt.secret
 // require('sp-jwt').JWT.defaults = sails.jwt.defaults
 
-module.exports = {
+let JWT = {
   secret: 'Change Me',
   defaults: {
     expiresIn: 60 * 60 * 2,
@@ -45,3 +45,5 @@ module.exports = {
   },
   decode: jwt.decode
 }
+
+module.exports = JWT
