@@ -35,8 +35,7 @@ let JWT = {
     }
     throw new Error('No Authorization header was found')
   },
-  async setTokenPayload(req) {
-    let token = JWT.getToken(req)
+  async setTokenPayload(req, token) {
     // Add JWT payload to req
     let payload = await JWT.verify(token)
     req.tokenPayload = payload

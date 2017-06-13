@@ -24,13 +24,15 @@ let dropMS = timestamp => moment((Math.floor(timestamp / 1000) - 1) * 1000).valu
 module.exports = (getModel, getMostRecentLogin, skipConcurrentLogins = _.stubFalse) => async function (req, res, next) {
   try {
     // Add JWT payload to req
-    JWT.setTokenPayload(req)
+    let token = JWT.getToken(req)
+    await JWT.setTokenPayload(req, token)
+    let payload = req.tokenPayload
 
     // Add req.user, etc
     _.convert({ immutable: false }).extend(req, getModel(payload))
 
     // Check Concurrent Login
-    let isNotImpersonation = _.isEmpty(req.tokenPayload.impersonateMode)
+    let isNotImpersonation = _.isEmpty(payload.impersonateMode)
     if (isNotImpersonation && !(await skipConcurrentLogins(req))) {
       var tokenIssued = moment(JWT.decode(token).iat * 1000).valueOf()
       if (tokenIssued < dropMS(await getMostRecentLogin(req.user))) throw new Error('concurrent login')
@@ -38,7 +40,7 @@ module.exports = (getModel, getMostRecentLogin, skipConcurrentLogins = _.stubFal
 
     // Refresh token
     // Need to omit `exp` and `iss` as of version 6 because they conflict with expires in and issuer passed in JWT
-    res.set('Renewed-Token', JWT.issue(_.omit(['exp', 'iss'], req.tokenPayload)))
+    res.set('Renewed-Token', JWT.issue(_.omit(['exp', 'iss'], payload)))
 
     next()
   } catch (e) {
