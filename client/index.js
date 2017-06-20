@@ -19,16 +19,21 @@ let logout = () => setToken('')
 // let addAuth = require('sp-jwt').addAuth
 // let request = _.curryN(3, addAuth(transport))
 let addAuth = f => async (method, url, params, includeJwr) => {
-  if (_.isArray(params)) { throw new Error('Passing an array in the services will prevent auth from being added') }
+  if (_.isArray(params)) {
+    throw new Error('Passing an array in the services will prevent auth from being added')
+  }
 
-  let [result, jwr] = await f(method, url, _.defaults({ token: getToken() }, params), true)
+  try {
+    let [result, jwr] = await f(method, url, _.defaults({ token: getToken() }, params), true)
+    if (options.checkError(result, jwr)) { options.handleJWTError(result, jwr) }
 
-  if (options.checkError(result, jwr)) { options.handleJWTError(result, jwr) }
+    var newToken = _.get(['headers', 'Renewed-Token'], jwr)
+    if (newToken) { setToken(newToken) }
 
-  var newToken = _.get(['headers', 'Renewed-Token'], jwr)
-  if (newToken) { setToken(newToken) }
-
-  return includeJwr ? [result, jwr] : result
+    return includeJwr ? [result, jwr] : result
+  } catch(e) {
+    options.handleJWTError(e)
+  }
 }
 
 export default {
