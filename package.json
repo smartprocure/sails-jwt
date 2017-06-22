@@ -1,6 +1,6 @@
 {
   "name": "sails-jwt",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "SmartProcure's JWT NPM package.",
   "author": "SmartProcure",
   "license": "MIT",

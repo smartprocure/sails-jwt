@@ -1,4 +1,8 @@
-﻿# 1.0.8
+﻿# 1.0.9
+If there's an exception, only handle JWT errors if the exception
+message is a known error.
+
+# 1.0.8
 If there's an exception, after handling the error as part of JWT, we
 should delegate the error so it is usable elsewhere.
 

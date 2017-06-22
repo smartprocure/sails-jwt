@@ -32,7 +32,7 @@ let addAuth = f => async (method, url, params, includeJwr) => {
 
     return includeJwr ? [result, jwr] : result
   } catch(e) {
-    options.handleJWTError(e)
+    if (options.checkError(e, {error:true})) options.handleJWTError(e)
     throw e
   }
 }
