@@ -1,4 +1,7 @@
-﻿# 1.0.9
+﻿# 1.0.10
+Enforce lowercased email values in the AuthModel.login method
+
+# 1.0.9
 If there's an exception, only handle JWT errors if the exception
 message is a known error.
 
