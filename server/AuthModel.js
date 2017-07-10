@@ -31,7 +31,7 @@ module.exports = (username = 'email', password = 'password') => {
         )
     },
     login: findOne => async (email, password) => {
-      let auth = await findOne({ email })
+      let auth = await findOne({ email: email.toLowerCase().trim() })
       if (!auth)
         return { error: 404, message: 'Incorrect email.' }
       let valid = await checkPassword(auth, password)
