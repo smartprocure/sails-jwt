@@ -29,7 +29,7 @@ module.exports = (getModel, getMostRecentLogin, skipConcurrentLogins = _.stubFal
     let payload = req.tokenPayload
 
     // Add req.user, etc
-    _.convert({ immutable: false }).extend(req, getModel(payload))
+    _.convert({ immutable: false }).extend(req, await getModel(payload))
 
     // Check Concurrent Login
     let isNotImpersonation = _.isEmpty(payload.impersonateMode)

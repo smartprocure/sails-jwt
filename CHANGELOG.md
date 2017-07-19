@@ -1,4 +1,7 @@
-﻿# 1.0.10
+# 1.0.11
+Properly await for the results of getModel
+
+# 1.0.10
 Enforce lowercased email values in the AuthModel.login method
 
 # 1.0.9
