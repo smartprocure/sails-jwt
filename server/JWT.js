@@ -8,16 +8,17 @@ let jwt = require('jsonwebtoken')
 
 let JWT = {
   secret: 'Change Me',
+  expiresIn: 60 * 60 * 2,
   defaults: {
-    expiresIn: 60 * 60 * 2,
     issuer: 'myapp'
   },
   renewTokenHeader: 'Renewed-Token',
   issue (payload, settings = {}) {
-    return jwt.sign(payload, module.exports.secret, _.defaults(module.exports.defaults, settings))
+    let exp = Math.floor(Date.now() / 1000) + JWT.expiresIn
+    return jwt.sign(_.defaults({exp}, payload), JWT.secret, _.defaults(JWT.defaults, settings))
   },
   verify (token) {
-    return Promise.promisify(jwt.verify)(token, module.exports.secret, module.exports.defaults)
+    return Promise.promisify(jwt.verify)(token, JWT.secret, JWT.defaults)
   },
   // Reference http://thesabbir.com/how-to-use-json-web-token-authentication-with-sails-js/
   // Implementation is the same as passport jwt library to get jwt token

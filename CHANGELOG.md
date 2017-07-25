@@ -1,3 +1,6 @@
+﻿# 1.1.0
+Fixed bug in the issue function. Now it actually refreshes the token.
+
 # 1.0.11
 Properly await for the results of getModel
 
