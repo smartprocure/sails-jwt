@@ -41,10 +41,9 @@ module.exports = (username = 'email', password = 'password') => {
     },
     generateVerifyToken: ({id, deltas}, options) => JWT.issue({
       id,
+      exp: (new Date() / 1000) + (60 * 60 * 24 * 30), // 30 day expiration
       deltas
-    }, _.defaults(options, {
-      expiresIn: 60 * 60 * 24 * 30 // 30 day expiration
-    })),
+    }, options),
     verify: (findOne, update, verified='verified') => async (verify, values) => {
       let payload = await JWT.verify(verify)
       let {id} = await findOne({id: payload.id})
