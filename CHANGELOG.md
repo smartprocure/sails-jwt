@@ -1,4 +1,7 @@
-﻿# 1.1.0
+﻿# 1.1.1
+Making sure generateVerifyToken works after the changes on JWT.issue.
+
+# 1.1.0
 Fixed bug in the issue function. Now it actually refreshes the token.
 
 # 1.0.11
