@@ -1,4 +1,7 @@
-﻿# 1.1.1
+# 1.1.2
+Switch from `async` to `Promise` methods to avoid regenerator runtime issues.
+
+# 1.1.1
 Making sure generateVerifyToken works after the changes on JWT.issue.
 
 # 1.1.0
