@@ -23,24 +23,17 @@ let logout = () => setToken('')
 // let addAuth = require('sp-jwt').addAuth
 // let request = _.curryN(3, addAuth(transport))
 let addAuth = f => (method, url, params, includeJwr) => {
-  if (_.isArray(params)) {
+  if (_.isArray(params))
     throw new Error(
       'Passing an array in the services will prevent auth from being added'
     )
-  }
 
   return Promise.resolve()
     .then(() => f(method, url, _.defaults({token: getToken()}, params), true))
     .then(([result, jwr]) => {
-      if (options.checkError(result, jwr)) {
-        options.handleJWTError(result, jwr)
-      }
-
+      if (options.checkError(result, jwr)) options.handleJWTError(result, jwr)
       var newToken = _.get(['headers', 'Renewed-Token'], jwr)
-      if (newToken) {
-        setToken(newToken)
-      }
-
+      if (newToken) setToken(newToken)
       return includeJwr ? [result, jwr] : result
     })
     .catch(e => {
