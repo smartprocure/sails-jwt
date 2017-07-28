@@ -32,7 +32,7 @@ module.exports = (getModel, getMostRecentLogin, skipConcurrentLogins = _.stubFal
     _.convert({ immutable: false }).extend(req, await getModel(payload))
 
     // Check Concurrent Login
-    let isNotImpersonation = _.isEmpty(payload.impersonateMode)
+    let isNotImpersonation = _.isEmpty(payload.impersonateStack)
     if (isNotImpersonation && !(await skipConcurrentLogins(req))) {
       var tokenIssued = moment(JWT.decode(token).iat * 1000).valueOf()
       if (tokenIssued < dropMS(await getMostRecentLogin(req.user))) throw new Error('concurrent login')
