@@ -36,8 +36,7 @@ module.exports = {
     let token = JWT.issue(tokenRaw)
     res.set(JWT.renewTokenHeader, token)
     return {token}
-  })
+  }),
+  verify: (fn, verify='verify', values='values') =>
+    async req => fn(req.param('verify'), req.param('values'))
 }
-
-module.exports.verify = (fn, verify='verify', values='values') =>
-  async req => fn(req.param('verify'), req.param('values'))
