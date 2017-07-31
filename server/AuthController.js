@@ -38,5 +38,5 @@ module.exports = {
     return {token}
   }),
   verify: (fn, verify='verify', values='values') =>
-    async req => fn(req.param('verify'), req.param('values'))
+    method(async req => fn(req.param('verify'), req.param('values')))
 }
