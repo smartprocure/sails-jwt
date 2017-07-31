@@ -39,7 +39,7 @@ module.exports = (username = 'email', password = 'password') => {
         return { error: 403, message: 'Invalid password.' }
       return auth
     },
-    impersonate: (findOne) => async (targetId) => await findOne({ id: targetId }),
+    impersonate: findOne => async id => await findOne({ id }),
     generateVerifyToken: ({id, deltas}, options) => JWT.issue({
       id,
       exp: (new Date() / 1000) + (60 * 60 * 24 * 30), // 30 day expiration
