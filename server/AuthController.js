@@ -13,14 +13,14 @@ module.exports = {
     res.set(JWT.renewTokenHeader, token);
     res.status(200).send({ token })
   },
-  impersonate: (findOne, id='id') => async (req, res) => {
+  impersonate: (id='id') => async (req, res) => {
     try {
       let token = JWT.issue({
         // The new user will be whatever the target id is
         user: req.param(id),
         // Add the previous user to the back of the stack of users ids
         // Makes it easy to use with lodash :D
-        impersonateStack: [...req.tokenPayload.impersonateStack || [], ...req.user.id]
+        impersonateStack: [...req.tokenPayload.impersonateStack || [], req.user.id]
       })
       res.set(JWT.renewTokenHeader, token)
       res.status(200).send({token})
