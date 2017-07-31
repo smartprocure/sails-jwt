@@ -13,7 +13,7 @@ module.exports = {
     res.set(JWT.renewTokenHeader, token);
     res.status(200).send({ token })
   },
-  impersonate: (_grabUser, id='id') => async (req, res) => {
+  impersonate: (findOne, id='id') => async (req, res) => {
     try {
       let token = JWT.issue({
         // The new user will be whatever the target id is
