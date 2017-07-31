@@ -40,8 +40,6 @@ module.exports = {
         // since they're the new user
         impersonateStack: _.initial(req.tokenPayload.impersonateStack)
       }
-      // _.dropRight will still return an empty array if it dropped all users
-      if (_.isEmpty(tokenRaw.impersonateStack)) delete tokenRaw.impersonateStack
       let token = JWT.issue(tokenRaw)
       res.set(JWT.renewTokenHeader, token)
       res.status(200).send({token})
