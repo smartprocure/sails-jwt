@@ -20,7 +20,7 @@ module.exports = {
         user: req.param(id),
         // Add the previous user to the back of the stack of users ids
         // Makes it easy to use with lodash :D
-        impersonateStack: _.concat(req.user.id)(req.tokenPayload.impersonateStack || [])
+        impersonateStack: [...req.tokenPayload.impersonateStack || [], ...req.user.id]
       })
       res.set(JWT.renewTokenHeader, token)
       res.status(200).send({token})
@@ -38,7 +38,7 @@ module.exports = {
         user: _.last(req.tokenPayload.impersonateStack),
         // New stack should be the all but the last user
         // since they're the new user
-        impersonateStack: _.dropRight(1)(req.tokenPayload.impersonateStack)
+        impersonateStack: _.initial(req.tokenPayload.impersonateStack)
       }
       // _.dropRight will still return an empty array if it dropped all users
       if (_.isEmpty(tokenRaw.impersonateStack)) delete tokenRaw.impersonateStack
