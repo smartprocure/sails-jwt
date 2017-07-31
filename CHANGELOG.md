@@ -1,3 +1,6 @@
+# 1.2.0
+Add support for impersonation.
+
 # 1.1.2
 Switch from `async` to `Promise` methods to avoid regenerator runtime issues.
 
