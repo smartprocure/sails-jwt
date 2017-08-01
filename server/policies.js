@@ -1,5 +1,3 @@
-let f = require('futil-js')
-
 module.exports = {
   impersonate: async (req, res, {id}) => {
     if (!id || !req.tokenPayload) throw new Error('403 Forbidden')
