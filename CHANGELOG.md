@@ -1,3 +1,6 @@
+# 1.3.0
+Add opt-in impersonation policies
+
 # 1.2.0
 Add support for impersonation.
 
