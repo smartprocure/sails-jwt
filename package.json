@@ -15,7 +15,7 @@
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
-    "futil-js": "^1.25.0",
+    "futil-js": "^1.27.0",
     "include-all": "^4.0.3",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
