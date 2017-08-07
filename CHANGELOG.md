@@ -1,3 +1,6 @@
+# 1.4.0
+Add basic auth policy
+
 # 1.3.0
 Add opt-in impersonation policies
 
