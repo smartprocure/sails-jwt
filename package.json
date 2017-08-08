@@ -9,7 +9,7 @@
     "build": "webpack --config client.webpack.config.js",
     "test": "jest",
     "lint": "standard src/**/*.js",
-    "test:ci": "npm run lint:ci",
+    "test:ci": "npm t -- --coverage --json --outputFile=test-results.json",
     "lint:ci": "npm run lint | standard-json > lint-results.json",
     "prepublish": "npm run build",
     "start": "node server.js"
