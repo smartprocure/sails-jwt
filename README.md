@@ -54,29 +54,50 @@ let request = _.curryN(3, addAuth(transport))
 
 ## Basic auth policy setup
 
+This policy can be used to configure sails.js endpoints to allow support for basic auth authentication
+through http authorization header in the request
+
 ### Instantiate and assign in your policies.js configuration
 
 ```javascript
+// ... sails policies.js configuration
+
 let basicAuthStatic = require('sails-jwt/server/basicAuthStatic')({
     username: 'defaultUser',
     password: 'defaultPassword',
-    controller: {
+    BasicAuthController: {
         username: 'controllerUser',
         password: 'controllerPassword'
     },
-    controller2: {
+    BasicAuthMethodController: {
         '*': {
             username: 'controller2User',
-            password: 'controller2Password',
-            method: {
-                username: 'methodUser',
-                password: 'methodPassword'
-            },
-            openMethod:     true,
-            lockedMethod:   false
-        }
+            password: 'controller2Password'
+        },
+        basicAuthMethod: {
+            username: 'methodUser',
+            password: 'methodPassword'
+        },
+        openMethod:     true,
+        lockedMethod:   false
     }
 })
+
+module.exports.policies = {
+    // will enforce the default user/pass for all endpoints on this controller
+    SomeController: {
+        '*': basicAuthStatic
+    },
+    // will enforce the BasicAuthController user/pass override for all endpoints on this controller
+    BasicAuthController: {
+        '*': basicAuthStatic
+    },
+    // will enforce the BasicAuthMethodController "*" user/pass for all endpoints on this controller
+    // except the basicAuthMethod which will require the overriding user/pass combo from the configuration for that controller's method
+    BasicAuthMethodController: {
+        '*': basicAuthStatic
+    }
+}
 ```
 
 ## License
