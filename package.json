@@ -1,13 +1,16 @@
 {
   "name": "sails-jwt",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "SmartProcure's JWT NPM package.",
   "author": "SmartProcure",
   "license": "MIT",
   "scripts": {
+    "danger": "duti",
     "build": "webpack --config client.webpack.config.js",
     "test": "jest",
     "lint": "standard src/**/*.js",
+    "test:ci": "npm t -- --coverage --json --outputFile=test-results.json",
+    "lint:ci": "npm run lint | standard-json > lint-results.json",
     "prepublish": "npm run build",
     "start": "node server.js"
   },
@@ -32,8 +35,10 @@
     "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
+    "duti": "latest",
     "jest": "^20.0.4",
     "standard": "^10.0.2",
+    "standard-json": "^1.0.2",
     "webpack": "^2.4.1"
   },
   "repository": {

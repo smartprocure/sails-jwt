@@ -1,3 +1,6 @@
+# 1.4.1
+Add duti to the repo
+
 # 1.4.0
 Add basic auth policy
 
