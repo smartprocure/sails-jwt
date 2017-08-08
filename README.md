@@ -52,6 +52,33 @@ let addAuth = require('sp-jwt/client').addAuth
 let request = _.curryN(3, addAuth(transport))
 ```
 
+## Basic auth policy setup
+
+### Instantiate and assign in your policies.js configuration
+
+```javascript
+let basicAuthStatic = require('sails-jwt/server/basicAuthStatic')({
+    username: 'defaultUser',
+    password: 'defaultPassword',
+    controller: {
+        username: 'controllerUser',
+        password: 'controllerPassword'
+    },
+    controller2: {
+        '*': {
+            username: 'controller2User',
+            password: 'controller2Password',
+            method: {
+                username: 'methodUser',
+                password: 'methodPassword'
+            },
+            openMethod:     true,
+            lockedMethod:   false
+        }
+    }
+})
+```
+
 ## License
 
 Too young to get a license 🚗
