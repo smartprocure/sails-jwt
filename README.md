@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/smartprocure/sails-jwt.svg?style=svg)](https://circleci.com/gh/smartprocure/sails-jwt)
+
 # sails-jwt
 SmartProcure's JWT NPM package - the best, least-opinionated JWT package for managing users in sailsjs.
 
