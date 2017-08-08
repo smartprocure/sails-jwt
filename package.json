@@ -5,9 +5,12 @@
   "author": "SmartProcure",
   "license": "MIT",
   "scripts": {
+    "danger": "duti",
     "build": "webpack --config client.webpack.config.js",
-    "test": "standard src/**/*.js",
+    "test": "npm run lint",
     "lint": "standard src/**/*.js",
+    "test:ci": "npm run lint:ci",
+    "lint:ci": "npm run lint | standard-json > lint-results.json",
     "prepublish": "npm run build",
     "start": "node server.js"
   },
@@ -31,7 +34,9 @@
     "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
+    "duti": "^0.3.2",
     "standard": "^10.0.2",
+    "standard-json": "^1.0.2",
     "webpack": "^2.4.1"
   },
   "repository": {
