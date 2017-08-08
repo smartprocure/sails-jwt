@@ -1,3 +1,6 @@
+# 1.4.3
+Move __test__ to root folder
+
 # 1.4.2
 Updated readme
 

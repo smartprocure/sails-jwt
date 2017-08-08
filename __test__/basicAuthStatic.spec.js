@@ -1,4 +1,4 @@
-const basicStaticAuth = require('../basicAuthStatic')
+const basicStaticAuth = require('../server/basicAuthStatic')
 
 let staticAuths = {
   username: 'user',
