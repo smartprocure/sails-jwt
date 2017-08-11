@@ -1,3 +1,6 @@
+# 1.4.4
+Able to pass a Function or Object as configuration for Basic Auth
+
 # 1.4.3
 Move __test__ to root folder
 

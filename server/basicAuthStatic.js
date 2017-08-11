@@ -23,7 +23,7 @@ let getAuth = (url, auths) => url && f.reduce((memo, part) => find((val, key) =>
 
 module.exports = staticAuths => (req, res, next) => {
   let credentials = basicAuth(req)
-  let auth = getAuth(req.originalUrl, staticAuths);
+  let auth = getAuth(req.originalUrl, f.callOrReturn(staticAuths))
 
   let result = (auth !== false) && ((auth === true) || (credentials && credentials.name === auth.username && credentials.pass === auth.password));
   if (result) next()
