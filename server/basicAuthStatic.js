@@ -20,7 +20,7 @@ const basicAuth = require('basic-auth')
 // }
 
 let urlParts = x => (x || '').substr(1).split('/')
-let caselessEqual = (part, key) => f.makeAndTest('i')(`^${part}$`)(key)
+let caselessEqual = (a, b) => RegExp(`^${a}$`, 'i').test(b)
 let getAuth = (auths, url) =>
   f.reduce(
     (memo, part) =>
