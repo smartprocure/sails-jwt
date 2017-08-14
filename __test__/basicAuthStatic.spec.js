@@ -1,16 +1,16 @@
 const basicStaticAuth = require('../server/basicAuthStatic')
 
 let staticAuths = {
-  username: 'user',
-  password: 'pass',
+  name: 'user',
+  pass: 'pass',
   model: {
     '*': {
-      username: 'user',
-      password: 'pass'
+      name: 'user',
+      pass: 'pass'
     },
     method: {
-      username: 'user',
-      password: 'pass',
+      name: 'user',
+      pass: 'pass',
     }
   }
 }
