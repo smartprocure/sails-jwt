@@ -1,3 +1,6 @@
+# 1.4.5
+Bug fix for `stripToken` which wasn't stripping the token if you pass an empty string
+
 # 1.4.4
 Able to pass a Function or Object as configuration for Basic Auth
 
