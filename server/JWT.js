@@ -27,7 +27,7 @@ let JWT = {
       var parts = req.headers.authorization.split(' ')
       if (parts.length === 2 && /^Bearer$/i.test(parts[0])) { return parts[1] }
       throw new Error('Format is Authorization: Bearer [token]')
-    } else if (req.body.hasOwnProperty('token')) {
+    } else if (req.query.hasOwnProperty('token') || req.body.hasOwnProperty('token')) {
       var token = req.param('token')
       // Delete the token to not mess with blueprints (could be in body for POST or query for GET)
       delete req.query.token
