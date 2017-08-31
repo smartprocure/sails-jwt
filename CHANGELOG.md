@@ -1,3 +1,6 @@
+# 1.4.6
+Bug fix for `stripToken` which wasn't stripping the token if you pass an empty string
+
 # 1.4.5
 Always run Duti in Circle
 
