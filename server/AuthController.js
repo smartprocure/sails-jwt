@@ -1,12 +1,15 @@
 let _ = require('lodash/fp')
 let JWT = require('./JWT')
 let {method} = require('sails-async')
+let F = require('futil-js')
 
 module.exports = {
   login: (login, username='email', password='password', id='id') => method(async (req, res) => {
     let user = await login(req.param(username), req.param(password))
-    if (user.error)
-      return res.status(user.error || 401).send(user)
+    if (user.error) {
+      if (user.error) F.throws(user.error)
+      return 401
+    }
     let token = JWT.issue({
       user: user[id]
     })

@@ -1,4 +1,8 @@
-# 1.4.6
+﻿# 1.4.7
+Bug fix for `login` which was calling to res.send even though it was a
+wrapped in a sails-async method.
+
+ # 1.4.6
 Bug fix for `stripToken` which wasn't stripping the token if you pass an empty string
 
 # 1.4.5
