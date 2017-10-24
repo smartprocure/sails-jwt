@@ -27,5 +27,5 @@ module.exports = staticAuths => (req, res, next) => {
 
   let result = (auth !== false) && ((auth === true) || (credentials && credentials.name === auth.username && credentials.pass === auth.password));
   if (result) next()
-  else res.send(401, 'Basic Auth Failed')
+  else return 401
 }
