@@ -7,7 +7,7 @@ module.exports = {
   login: (login, username='email', password='password', id='id') => method(async (req, res) => {
     let user = await login(req.param(username), req.param(password))
     if (user.error) {
-      if (user.error) F.throws(user.error)
+      if (user.error) F.throws(user.message || user.error)
       return 401
     }
     let token = JWT.issue({
