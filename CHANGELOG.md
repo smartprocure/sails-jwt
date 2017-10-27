@@ -1,4 +1,8 @@
-﻿# 1.4.7
+﻿# 1.4.8
+Making sure `login` throws the error message instead of just the
+status code if there's a message.
+
+# 1.4.7
 Bug fix for `login` which was calling to res.send even though it was a
 wrapped in a sails-async method.
 
