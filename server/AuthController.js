@@ -4,15 +4,15 @@ let {method} = require('sails-async')
 let F = require('futil-js')
 
 module.exports = {
-  login: (authenticate) => {
+  login: async (authenticate, res) => {
     let userId = await authenticate()
     let token = JWT.issue({
       user: userId
     })
     // Set here so client auto uses it
-    res.set(JWT.renewTokenHeader, token);
+    res.set(JWT.renewTokenHeader, token)
     return {token}
-  }),
+  },
   impersonate: (id='id') => method(async (req, res) => {
     let token = JWT.issue({
       // The new user will be whatever the target id is
