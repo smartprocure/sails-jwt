@@ -6,12 +6,19 @@ let F = require('futil-js')
 module.exports = {
   login: (authenticate) => method(async (req, res) => {
     let userId = await authenticate(req.allParams(), req, res)
-    let token = JWT.issue({
-      user: userId
-    })
-    // Set here so client auto uses it
-    res.set(JWT.renewTokenHeader, token);
-    return {token}
+    if (!_.isNil(userId)) {
+      let token = JWT.issue({
+        user: userId
+      })
+      // Set here so client auto uses it.
+      res.set(JWT.renewTokenHeader, token)
+      return {token}
+    } else {
+      F.throws({
+        statusCode: 403,
+        message: 'Invalid user id.'
+      })
+    }
   }),
   impersonate: (id='id') => method(async (req, res) => {
     let token = JWT.issue({
