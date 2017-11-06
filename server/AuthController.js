@@ -5,7 +5,7 @@ let F = require('futil-js')
 
 module.exports = {
   login: (authenticate) => method(async (req, res) => {
-    let userId = await authenticate(req.allParams(), res)
+    let userId = await authenticate(req.allParams(), req, res)
     let token = JWT.issue({
       user: userId
     })
