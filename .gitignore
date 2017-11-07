@@ -58,4 +58,4 @@ typings/
 .env
 
 # Build Output
-client.js*
+#client.js*

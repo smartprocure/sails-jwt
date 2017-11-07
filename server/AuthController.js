@@ -15,7 +15,7 @@ module.exports = {
       return {token}
     } else {
       F.throws({
-        statusCode: 403,
+        statusCode: 400,
         message: 'Invalid user id.'
       })
     }
