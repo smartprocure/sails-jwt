@@ -3,6 +3,19 @@ let JWT = require('./JWT')
 let {method} = require('sails-async')
 let F = require('futil-js')
 
+/*
+  GQ
+
+  The application's user controller creates a login function by invoking the AuthController.login function:
+    module.exports.login = AuthController.login(models.user.login)
+  The models.user.login function signature is:
+    (authPayload, req, res) => {...returns authentication strategy function...}
+  The login function selects an authentication strategy based on the authentication payload type.
+  The authentication strategy function signature is:
+    authenticate(authPayload, {req, res}) => {...returns an user id or responds with an exception...}
+  If a user id is provided a JWT token is issued, if an exception occurs the exception contains the
+  information needed for the client to decide the next step in the process.
+*/
 module.exports = {
   login: (authenticate) => method(async (req, res) => {
     let userId = await authenticate(req.allParams(), {req, res})
@@ -13,11 +26,6 @@ module.exports = {
       // Set here so client auto uses it.
       res.set(JWT.renewTokenHeader, token)
       return {token}
-    } else {
-      F.throws({
-        statusCode: 400,
-        message: 'Invalid user id.'
-      })
     }
   }),
   impersonate: (id='id') => method(async (req, res) => {
