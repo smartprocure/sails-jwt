@@ -1,4 +1,8 @@
-﻿# 1.4.8
+﻿# 1.5.0
+Migrated to use an authentication function external to this library instead of a login function.
+The authentication functions determines if the client gets a JWT token containing the authentication id. 
+
+# 1.4.8
 Making sure `login` throws the error message instead of just the
 status code if there's a message.
 
