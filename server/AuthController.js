@@ -3,19 +3,30 @@ let JWT = require('./JWT')
 let {method} = require('sails-async')
 let F = require('futil-js')
 
+/*
+  GQ
+
+  The application's user controller creates a login function by invoking the AuthController.login function:
+    module.exports.login = AuthController.login(models.user.login)
+  The models.user.login function signature is:
+    (authPayload, req, res) => {...returns authentication strategy function...}
+  The login function selects an authentication strategy based on the authentication payload type.
+  The authentication strategy function signature is:
+    authenticate(authPayload, {req, res}) => {...returns an user id or responds with an exception...}
+  If a user id is provided a JWT token is issued, if an exception occurs the exception contains the
+  information needed for the client to decide the next step in the process.
+*/
 module.exports = {
-  login: (login, username='email', password='password', id='id') => method(async (req, res) => {
-    let user = await login(req.param(username), req.param(password))
-    if (user.error) {
-      if (user.error) F.throws(user.message || user.error)
-      return 401
+  login: (authenticate) => method(async (req, res) => {
+    let userId = await authenticate(req.allParams(), {req, res})
+    if (!_.isNil(userId)) {
+      let token = JWT.issue({
+        user: userId
+      })
+      // Set here so client auto uses it.
+      res.set(JWT.renewTokenHeader, token)
+      return {token}
     }
-    let token = JWT.issue({
-      user: user[id]
-    })
-    // Set here so client auto uses it
-    res.set(JWT.renewTokenHeader, token);
-    return {token}
   }),
   impersonate: (id='id') => method(async (req, res) => {
     let token = JWT.issue({
