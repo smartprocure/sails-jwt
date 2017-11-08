@@ -1,4 +1,6 @@
-﻿# 2.0.0
+﻿# 2.0.1
+Use the payload from sails-async `method` instead of invoking `allParams`.
+# 2.0.0
 Migrated to use an authentication function external to this library instead of a login function.
 The authentication functions determines if the client gets a JWT token containing the authentication id. 
 
