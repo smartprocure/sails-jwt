@@ -17,8 +17,8 @@ let F = require('futil-js')
   information needed for the client to decide the next step in the process.
 */
 module.exports = {
-  login: (authenticate) => method(async (req, res) => {
-    let userId = await authenticate(req.allParams(), {req, res})
+  login: (authenticate) => method(async (req, res, authPayload) => {
+    let userId = await authenticate(authPayload, {req, res})
     if (!_.isNil(userId)) {
       let token = JWT.issue({
         user: userId
