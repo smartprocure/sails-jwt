@@ -19,7 +19,7 @@ const basicAuth = require('basic-auth')
 //     }
 // }
 
-let getAuth = (url, auths) => url && f.reduce((memo, part) => find((val, key) => f.makeAndTest('i')(`^${part}$`)(key), memo) || memo['*'] || memo, auths, url.substr(1).split('/'))
+let getAuth = (url, auths) => url && f.reduceIndexed((memo, part) => find((val, key) => f.makeAndTest('i')(`^${part}$`)(key), memo) || memo['*'] || memo, auths, url.substr(1).split('/'))
 
 module.exports = staticAuths => (req, res, next) => {
   let credentials = basicAuth(req)
