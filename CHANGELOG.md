@@ -1,3 +1,6 @@
+﻿# 2.0.3
+Fixed issue with res.send
+
 # 2.0.2
 Switching to F.reduceIndexed since F.reduce is deprecated
 
