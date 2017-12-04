@@ -30,7 +30,7 @@ let checkAuth = (req, res, success, auth) => {
   auth.username = ''
   auth.password = ''
   basicAuth(req, res, success)
-  expect(res.send).toHaveBeenCalledWith(401, 'Basic Auth Failed')
+  expect(res.send).toHaveBeenCalledWith('Basic Auth Failed')
   expect(success).toHaveBeenCalledTimes(0)
   success.mockClear()
   res.send.mockClear()
@@ -45,8 +45,9 @@ it('Should Check Basic Auth', async () => {
   }
 
   let res = {
-    send: jest.fn()
+    send: jest.fn(),
   }
+  res.status = () => ({ send: res.send })
 
   let success = jest.fn()
 
